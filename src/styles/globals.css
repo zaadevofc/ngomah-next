@@ -2,26 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  @apply font-['Plus_Jakarta_Sans'] hide-scroll select-none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+input {
+  @apply !rounded-3xl !border !border-slate-400 !outline-none;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.click {
+  @apply active:scale-[.98] sm:cursor-pointer;
+}
+
+.click-none {
+  @apply active:!scale-100;
+}
+
+.default-border {
+  @apply border border-slate-400;
+}
+
+.default-btn {
+  @apply px-2 py-1 click border border-green-600 bg-green-500/40 w-fit text-center font-[poppins] font-medium rounded-2xl;
+}
+
+#default-btn-disable, .default-btn-disable {
+  @apply px-2 py-1 opacity-50 click-none border border-green-600 bg-green-500/40 w-fit text-center font-[poppins] font-medium rounded-2xl;
+}
+
+.set-amber {
+  @apply !border !border-amber-600 !bg-amber-500/30;
+}
+
+.nav-bottom-l-active {
+  @apply rounded-tl-3xl border-t-2 border-green-600 bg-gradient-to-t from-green-500/0 to-green-700/30 font-bold;
+}
+
+.nav-bottom-r-active {
+  @apply rounded-tr-3xl border-t-2 border-green-600 bg-gradient-to-t from-green-500/0 to-green-700/30 font-bold;
+}
+
+.nav-bottom-active {
+  @apply border-t-2 border-green-600 bg-gradient-to-t from-green-500/0 to-green-700/30 font-bold;
+}
+
+.modal.nobg::backdrop {
+  background-color: transparent;
+}
+
+.modal.page {
+  @apply p-0;
+}
+
+.hide-scroll::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  /* background-color: #F5F5F5; */
+}
+
+.hide-scroll::-webkit-scrollbar-thumb {
+  border-radius: 0px !important;
+  /* background-color: rgb(16 185 129); */
+}
+
+Image, img {
+  @apply select-none;
 }
