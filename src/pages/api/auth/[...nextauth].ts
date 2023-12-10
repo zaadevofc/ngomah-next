@@ -15,7 +15,7 @@ export const auth = {
         signIn: '/auth/login',
         signOut: '/',
     },
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.SECRET,
     session: {
         strategy: 'jwt',
         jwt: true,
@@ -23,10 +23,10 @@ export const auth = {
         updateAge: 24 * 60 * 60,
     },
     callbacks: {
-        session(session: any) {
+        async session(session: any) {
             return session
         },
-        redirect(url: any) {
+        async redirect(url: any) {
             return url.baseUrl;
         }
     },

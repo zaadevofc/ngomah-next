@@ -15,20 +15,19 @@ const Maps = (props: any) => {
       let config: google.maps.MapOptions = {
         ...POSITION,
         mapId: 'mapz',
+        zoom: props.zoom ? props.zoom : 13,
         disableDefaultUI: true,
         scrollwheel: false
       }
 
       let { Map } = await loader.importLibrary('maps')
       let { Marker } = await loader.importLibrary('marker')
-      let { Geocoder } = await loader.importLibrary('geocoding')
       let { LatLng } = await loader.importLibrary('core')
 
       let map = new Map(mapRef.current as HTMLDivElement, config)
-      // let revGeo = await new Geocoder().geocode({ location: POSITION.center })
-      let getGeo = await new Geocoder().geocode({ address: 'solo' })
-      console.log(getGeo);
-      
+
+      let tyty: any = document.getElementById('tyty');
+
       let setMark = ({ lat, lng }: any) => {
         new Marker({
           position: { lat, lng },
@@ -37,7 +36,7 @@ const Maps = (props: any) => {
       }
 
       if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(({ coords }) => {
+        navigator.geolocation.getCurrentPosition(async ({ coords }) => {
           let { latitude: lat, longitude: lng } = coords;
           let latlng = new LatLng({ lat, lng })
           map.setCenter(latlng)
@@ -49,7 +48,9 @@ const Maps = (props: any) => {
   }, [])
 
   return (
-    <div className={props.className} id="mapz" ref={mapRef}></div>
+    <>
+      <div className={props.className} id="mapz" ref={mapRef}></div>
+    </>
   )
 }
 

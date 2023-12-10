@@ -1,12 +1,22 @@
 import Container from "@/components/Container";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FiArrowLeft, FiEdit } from "react-icons/fi";
+import { FiArrowLeft, FiArrowUp, FiBook, FiEdit, FiInfo, FiPlus } from "react-icons/fi";
+
+let list1 = [
+  { title: 'Info Pribadi', icon: FiInfo },
+  { title: 'Alamat Saya', icon: FiBook },
+]
+
+let list2 = [
+  { title: 'Riwayat Top Up', icon: FiPlus },
+  { title: 'Riwayat Transfer', icon: FiArrowUp },
+]
 
 const profile = () => {
   let { data: session }: any = useSession();
   let router = useRouter();
-  
+
   return (
     <>
       <Container className="h-full flex-col">
@@ -32,14 +42,39 @@ const profile = () => {
               <div className="flex flex-col">
                 <h1 className="font-extrabold font-['Poppins'] text-lg">{session?.token.name}</h1>
                 <h1 className="font-semibold">{session?.token.email}</h1>
-                <h1 className="text-sm">{session?.token.sub}</h1>
+                {/* <h1 className="text-sm">{session?.token.sub}</h1> */}
               </div>
             </div>
             <FiEdit className="text-green-600 fill-green-500/20" />
           </div>
-          <div className="flex flex-col mt-8 p-4">
+          <div className="flex flex-col mt-5 p-4">
             <div className="flex flex-row items-center">
-              {/* <h1>Pesanan</h1> */}
+              <h1 className="font-bold text-sm">Pengaturan</h1>
+            </div>
+            <div className="flex flex-col mt-5 divide-y gap-3">
+              {list1.map(x => (
+                <div className="flex pt-3 click flex-row items-center gap-3 text-lg font-semibold">
+                  <div className="bg-green-500 rounded-xl p-1.5 text-white">
+                    <x.icon />
+                  </div>
+                  <h1 className="font-[poppins]">{x.title}</h1>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col mt-5 p-4">
+            <div className="flex flex-row items-center">
+              <h1 className="font-bold text-sm">Riwayat</h1>
+            </div>
+            <div className="flex flex-col mt-5 divide-y gap-3">
+              {list2.map(x => (
+                <div className="flex pt-3 click flex-row items-center gap-3 text-lg font-semibold">
+                  <div className="bg-green-500 rounded-xl p-1.5 text-white">
+                    <x.icon />
+                  </div>
+                  <h1 className="font-[poppins]">{x.title}</h1>
+                </div>
+              ))}
             </div>
           </div>
         </div>
