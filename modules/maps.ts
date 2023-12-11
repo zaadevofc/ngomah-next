@@ -1,13 +1,23 @@
 import { Loader } from "@googlemaps/js-api-loader"
 
 export const getAddress = async ({ lat, lng }: any) => {
-    let loader = new Loader({
-        apiKey: process.env.NEXT_PUBLIC_GMAPS_KEY as string,
-        version: 'weekly'
-    })
-    let { Geocoder } = await loader.importLibrary('geocoding')
-    let revGeo = await new Geocoder().geocode({ location: { lat, lng }, language: 'id' })
-    return revGeo?.results;
+    try {
+        let loader = new Loader({
+            apiKey: process.env.NEXT_PUBLIC_GMAPS_KEY as string,
+            version: 'weekly'
+        })
+        let { Geocoder } = await loader.importLibrary('geocoding')
+        let revGeo = (await new Geocoder().geocode({ location: { lat, lng }, language: 'id' })).results
+        return revGeo;
+    } catch (e) {
+        let loader = new Loader({
+            apiKey: process.env.NEXT_PUBLIC_GMAPS_KEY as string,
+            version: 'weekly'
+        })
+        let { Geocoder } = await loader.importLibrary('geocoding')
+        let revGeo = (await new Geocoder().geocode({ location: { lat, lng }, language: 'id' })).results
+        return revGeo;
+    }
 }
 
 export const getLatLng = async (address: string) => {
@@ -31,7 +41,7 @@ export const searchAddress = async (address: string) => {
             version: 'weekly'
         })
         let { AutocompleteService } = await loader.importLibrary('places')
-        let data = await new AutocompleteService().getPlacePredictions({ input: address })
+        let data = await new AutocompleteService().getPlacePredictions({ input: address, language: 'id', region: 'ID' })       
         return data.predictions;
     } catch (e) {
         return null

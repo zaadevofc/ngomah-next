@@ -1,9 +1,9 @@
 // import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 // import prisma from "../../../../modules/db"
 
-export const auth = {
+export const auth: AuthOptions = {
     // adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
@@ -15,21 +15,20 @@ export const auth = {
         signIn: '/auth/login',
         signOut: '/',
     },
-    secret: process.env.SECRET,
     session: {
         strategy: 'jwt',
-        jwt: true,
         maxAge: 30 * 24 * 60 * 60,
-        updateAge: 24 * 60 * 60,
+        updateAge: 24 * 60 * 60
     },
     callbacks: {
-        async session(session: any) {
+        session(session: any) {
             return session
         },
-        async redirect(url: any) {
+        redirect(url: any) {
             return url.baseUrl;
         }
     },
+    secret: process.env.NEXTAUTH_SECRET
 }
 
 export default NextAuth(auth as any)

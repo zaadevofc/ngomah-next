@@ -17,7 +17,7 @@ const Maps = (props: any) => {
         mapId: 'mapz',
         zoom: props.zoom ? props.zoom : 13,
         disableDefaultUI: true,
-        scrollwheel: false
+        // scrollwheel: false
       }
 
       let { Map } = await loader.importLibrary('maps')
@@ -26,13 +26,25 @@ const Maps = (props: any) => {
 
       let map = new Map(mapRef.current as HTMLDivElement, config)
 
-      let tyty: any = document.getElementById('tyty');
-
       let setMark = ({ lat, lng }: any) => {
         new Marker({
           position: { lat, lng },
           map: map
         })
+      }
+
+      if (props.awal) {
+        let latlng = new LatLng(props.awal)
+        map.setCenter(latlng)
+        setMark(props.awal)
+      }
+
+      if (props.akhir) {
+        console.log(props.akhir);
+        
+        let latlng = new LatLng(props.akhir)
+        map.setCenter(latlng)
+        setMark(props.akhir)
       }
 
       if ('geolocation' in navigator) {

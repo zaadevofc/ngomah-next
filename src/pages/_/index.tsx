@@ -11,17 +11,17 @@ import Navbar from "@/components/Navbar";
 const index = () => {
   return (
     <>
-        <Container className="mb-16 h-full flex-col">
-          <div className="flex flex-col">
-            <Navbar />
-            <CardInfo />
-            <CardCurrentPosition />
-            <CardHistory />
-            <CardRating />
-            <CardRecommend />
-          </div>
-        </Container>
-        <BottomBar />
+      <Container className="mb-16 h-full flex-col">
+        <div className="flex flex-col">
+          <Navbar />
+          <CardInfo />
+          <CardCurrentPosition />
+          <CardHistory />
+          <CardRating />
+          <CardRecommend />
+        </div>
+      </Container>
+      <BottomBar />
     </>
   )
 }

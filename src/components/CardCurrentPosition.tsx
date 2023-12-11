@@ -1,12 +1,14 @@
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { getAddress } from "../../modules/maps"
 import ActionModal from "./ActionModal"
 
 const CardCurrentPosition = () => {
-  let [showModal, setShowModal] = useState<boolean>(false)
   let [refreshGeo, setRefreshGeo] = useState<boolean>(false)
   let [copyAddress, setCopyAddress] = useState<boolean>(false)
   let [dataGeo, setDataGeo] = useState<any>(false)
+
+  let router = useRouter()
 
   useEffect(() => {
     setDataGeo(false);
@@ -35,7 +37,7 @@ const CardCurrentPosition = () => {
 
   return (
     <>
-      <ActionModal showModal={showModal} setShowModal={setShowModal} dataGeo={dataGeo} />
+      <ActionModal dataGeo={dataGeo} />
       <div className="flex flex-col mt-16 mx-4">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col justify-start">
@@ -54,9 +56,10 @@ const CardCurrentPosition = () => {
         </div>
         <div className="flex flex-row gap-3 items-center justify-between mt-3">
           <h1 onClick={handleCopy} className="default-btn text-sm !w-full set-amber">{copyAddress ? '✅' : 'Salin Alamat'}</h1>
-          <h1 onClick={() => setShowModal(true)} className="default-btn text-sm !w-full">Pakai Lokasi</h1>
+          <h1 onClick={() => router.push('/_/planning/?data=current')} className="default-btn text-sm !w-full">Pakai Lokasi</h1>
         </div>
-      </div></>
+      </div>
+    </>
   )
 }
 

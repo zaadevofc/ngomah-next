@@ -1,4 +1,3 @@
-import Container from "@/components/Container";
 import { useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
 import { FaCircleDot } from "react-icons/fa6";
@@ -25,7 +24,7 @@ const ActionModal = (props: any) => {
 
   return (
     <>
-      <Container className={`${props.showModal && '-top-[1.1px]'} h-full top-[999px] w-full flex-col fixed bg-white z-[1000] duration-500`}>
+      <section className={`${props.showModal ? 'top-[0px]' : ''} flex mx-auto sm:max-w-sm h-full top-[999px] w-full flex-col fixed bg-white z-[1000] duration-500`}>
         <div className="flex flex-col h-full">
           <button className="flex flex-row w-fit font-bold text-[16px] items-center p-4 gap-4">
             <FiX onClick={() => props.setShowModal(false)} className='text-xl mt-0.5' />
@@ -40,7 +39,7 @@ const ActionModal = (props: any) => {
                 <div className="rounded-full bg-green-600 text-white p-1.5">
                   <FaArrowUp />
                 </div>
-                <h1 className="font-bold text-lg tracking-wide font-[poppins]">{props.dataGeo?.address_components && props.dataGeo?.address_components[1]['long_name']}</h1>
+                <h1 className="font-bold text-lg tracking-wide font-[poppins]">{props.dataGeo?.address_components && props.dataGeo?.address_components[1]['long_name'] || 'Ga ada'}</h1>
               </div>
               <span className="h-[.1px] self-end bg-slate-300 w-11/12"></span>
               <div className="flex flex-row items-center gap-3">
@@ -64,7 +63,7 @@ const ActionModal = (props: any) => {
             ))}
           </div>
         </div>
-      </Container>
+      </section>
     </>
   )
 }
