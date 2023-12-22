@@ -1,4 +1,5 @@
 
+import { SALDO } from '@/consts';
 import Link from 'next/link';
 import { FaEllipsis, FaWallet } from 'react-icons/fa6';
 import { GrTransaction } from 'react-icons/gr';
@@ -23,7 +24,7 @@ const CardInfo = () => {
                                 <FaWallet />
                             </div>
                             <div className="flex flex-col leading-tight text-sm">
-                                <h1 className="font-bold">Rp{formatRupiah(0)}</h1>
+                                <h1 className="font-bold">Rp{formatRupiah(SALDO)}</h1>
                                 <Link href="/_/riwayat" className="click text-green-700 font-medium text-[13px]">Cek riwayat {'>'}</Link>
                             </div>
                         </div>

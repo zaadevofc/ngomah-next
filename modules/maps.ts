@@ -41,9 +41,18 @@ export const searchAddress = async (address: string) => {
             version: 'weekly'
         })
         let { AutocompleteService } = await loader.importLibrary('places')
-        let data = await new AutocompleteService().getPlacePredictions({ input: address, language: 'id', region: 'ID' })       
+        let data = await new AutocompleteService().getPlacePredictions({ input: address, language: 'id', region: 'ID' })
         return data.predictions;
     } catch (e) {
         return null
     }
+}
+
+export const getDistance = async (from: any, to: any) => {
+    let loader = new Loader({
+        apiKey: process.env.NEXT_PUBLIC_GMAPS_KEY as string,
+        version: 'weekly'
+    })
+    let { spherical: { computeDistanceBetween } } = await loader.importLibrary('geometry')
+    return computeDistanceBetween({ lat: from.lat, lng: from.lng }, { lat: to.lat, lng: to.lng }).toFixed(0)
 }

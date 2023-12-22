@@ -9,3 +9,4 @@ export const SET_HEADERS = {
 }
 
 export let POSITION = { center: { lat: -7.4797342, lng: 110.2176941}, zoom: 13 }
+export let SALDO = 558089800;
